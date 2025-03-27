@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-16"?>
+<MigrationTable xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.microsoft.com/GroupPolicy/GPOOperations/MigrationTable">
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>Local account</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>NETWORK SERVICE</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>LOCAL SERVICE</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>ADD YOUR DOMAIN ADMINS</Source>
+    <Destination>Domain Admins@packet.loss</Destination>
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>ADD YOUR ENTERPRISE ADMINS</Source>
+    <Destination>Enterprise Admins@packet.loss</Destination>
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>Administrators</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>Users</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>Remote Desktop Users</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>Guests</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+  <Mapping>
+    <Type>Unknown</Type>
+    <Source>SERVICE</Source>
+    <DestinationSameAsSource />
+  </Mapping>
+</MigrationTable>

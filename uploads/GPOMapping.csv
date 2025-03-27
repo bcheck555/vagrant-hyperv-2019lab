@@ -1,0 +1,81 @@
+"Name","Target","Order","Link"
+"DoD WinSvr 2012 R2 DC STIG Comp v3r7","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
+"DoD WinSvr 2016 DC STIG Comp v2r9","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
+"DoD WinSvr 2019 DC STIG Comp v3r2","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
+"DoD WinSvr 2022 DC STIG Comp v2r3","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
+"DoD WinSvr 2012 R2 MS STIG Comp v3r7","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2016 MS STIG Comp v2r9","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2019 MS STIG Comp v3r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2022 MS STIG Comp v2r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Windows 10 STIG Computer v3r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Windows 11 Computer STIG v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Windows Defender Firewall STIG v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Microsoft Defender Antivirus STIG Computer v2r4","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Internet Explorer 11 STIG Computer v2r4","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Microsoft Edge STIG Computer v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Office System 2013 STIG Computer v2r1","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Infopath 2013 STIG Computer v1r5","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Lync 2013 STIG Computer v1r4","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Office System 2016 STIG Computer v2r4","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD OneDrive for Business 2016 STIG Computer v2r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Skype for Business 2016 STIG Computer v1r1","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Office 2019-M365 Apps STIG Comp v3r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Mozilla Firefox STIG v6r5","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Google Chrome STIG Computer v2r10","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Adobe Acrobat Reader DC Continuous STIG Computer V2R1","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Adobe Acrobat Pro DC Continuous STIG Computer v2r1","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD WinSvr 2012 R2 DC STIG User v3r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2012 R2 MS STIG User v3r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2016 DC STIG User v2r9","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2016 MS STIG User v2r9","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Windows 10 STIG User v3r3","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Windows 11 User STIG v2r2","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Internet Explorer 11 STIG User v2r4","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Office System 2013 STIG User v2r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Access 2013 STIG User v1r6","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Excel 2013 STIG User v1r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Infopath 2013 STIG User v1r5","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Outlook 2013 STIG User v1r13","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD PowerPoint 2013 STIG User v1r6","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Project 2013 STIG User v1r4","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Publisher 2013 STIG User v1r5","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Visio 2013 STIG User v1r4","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Word 2013 STIG User v1r6","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Office System 2016 STIG User v2r4","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Access 2016 STIG User v1r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Excel 2016 STIG User v2r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD OneDrive for Business 2016 STIG User v2r3","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Outlook 2016 STIG User v2r3","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD PowerPoint 2016 STIG User v1r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Project 2016 STIG User v1r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Publisher 2016 STIG User v1r3","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Word 2016 STIG User v1r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Visio 2016 STIG User v1r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Office 2019-M365 Apps STIG User v3r2","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Adobe Acrobat Reader DC Continuous STIG User V2R1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Adobe Acrobat Pro DC Continuous STIG User v2r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
