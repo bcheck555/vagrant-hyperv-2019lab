@@ -13,3 +13,9 @@ DHCP reserved address'.
       <li>Map GPOs to appropriate OU
     </ul>
   <li>SRV01 domain joined server
+
+  Install Vagrant
+  Install Hyper-V
+  Clone repo
+  Setup reserved address' in DHCP
+  From elevated Powershell: .\lab_up.ps1
