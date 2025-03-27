@@ -5,6 +5,7 @@ $supportPath= "Support Files"
 $psScript = "DISA_GPO_Baseline_Import.ps1"
 $gpoList = "DISA_AllGPO_Import_Jan2025.csv"
 $importTable = "C:\temp\importtable.migtable"
+$ProgressPreference = 'SilentlyContinue'   #Speeds up IWR
 
 #Import GPOs
 New-Item -ItemType "directory" -Path $basePath

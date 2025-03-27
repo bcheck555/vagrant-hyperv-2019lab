@@ -139,5 +139,10 @@ Vagrant.configure("2") do |config|
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       #Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -PassThru -Verbose
     POWERSHELL
+    srv01.vm.provision "installSplunk",
+      type: "shell",
+      privileged: "true",
+      reboot: "false",
+      path: "./scripts/InstallSplunk.ps1"
   end
 end
