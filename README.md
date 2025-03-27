@@ -10,5 +10,6 @@ DHCP reserved address'.
       <li>Import DISA WMI filters for a quick start
       <li>Map WMI filters to appropriate GPOs - NOT WORKING
       <li>Import OU structure
+      <li>Map GPOs to appropriate OU
     </ul>
   <li>SRV01 domain joined server
