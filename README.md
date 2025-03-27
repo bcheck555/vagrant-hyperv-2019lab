@@ -1,6 +1,5 @@
 Quick lab using Vagrant and Hyper-V.
 
-DHCP reserved address'.
 
 <ul>
   <li>DC01 setup as first domain controller
@@ -13,9 +12,14 @@ DHCP reserved address'.
       <li>Map GPOs to appropriate OU
     </ul>
   <li>SRV01 domain joined server
+</ul>
 
-  Install Vagrant
-  Install Hyper-V
-  Clone repo
-  Setup reserved address' in DHCP
-  From elevated Powershell: .\lab_up.ps1
+Install Vagrant
+
+Install Hyper-V
+  
+Clone repo
+  
+Setup reserved address' in DHCP
+  
+From elevated Powershell: .\lab_up.ps1
