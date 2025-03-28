@@ -110,6 +110,39 @@ Vagrant.configure("2") do |config|
       path: "./scripts/WMIMapping.ps1"
   end
   
+  config.vm.define "pki01" do |pki01|
+    pki01.vm.network "private_network", bridge: "Ethernet"
+    pki01.vm.provider "hyperv" do |hv|
+      hv.vmname = "pki01"
+      hv.cpus = 4
+      hv.memory = "8196"
+      hv.enable_virtualization_extensions = true
+      hv.linked_clone = true
+    end
+    pki01.vm.provision "uploads", 
+      type: "file",
+      source: "./uploads", destination: "c:/temp"
+      pki01.vm.provision "rename",
+      type: "shell",
+      privileged: "true",
+      reboot: "true",
+      inline: <<-'POWERSHELL'
+      $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
+      Set-TimeZone "Eastern Standard Time"
+      Set-LocalUser -Name "Administrator" -Password $dsrmPassword
+      Rename-Computer -NewName "pki01" -Force -PassThru
+    POWERSHELL
+    pki01.vm.provision "domain",
+      type: "shell",
+      privileged: "true",
+      inline: <<-'POWERSHELL'
+      $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
+      $serviceAccount = "packet\Administrator"
+      $credential = New-Object System.Management.Automation.PSCredential($serviceAccount, $dsrmPassword)
+      Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -Credential $credential -PassThru -Verbose -Restart -Force
+    POWERSHELL
+  end
+
   config.vm.define "log01" do |log01|
     log01.vm.network "private_network", bridge: "Ethernet"
     log01.vm.provider "hyperv" do |hv|
@@ -137,7 +170,9 @@ Vagrant.configure("2") do |config|
       privileged: "true",
       inline: <<-'POWERSHELL'
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
-      #Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -PassThru -Verbose
+      $serviceAccount = "packet\Administrator"
+      $credential = New-Object System.Management.Automation.PSCredential($serviceAccount, $dsrmPassword)
+      Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -Credential $credential -PassThru -Verbose -Restart -Force
     POWERSHELL
     log01.vm.provision "installSplunk",
       type: "shell",
