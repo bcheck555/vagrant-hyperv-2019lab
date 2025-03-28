@@ -110,19 +110,19 @@ Vagrant.configure("2") do |config|
       path: "./scripts/WMIMapping.ps1"
   end
   
-  config.vm.define "srv01" do |srv01|
-    srv01.vm.network "private_network", bridge: "Ethernet"
-    srv01.vm.provider "hyperv" do |hv|
-      hv.vmname = "srv01"
+  config.vm.define "log01" do |log01|
+    log01.vm.network "private_network", bridge: "Ethernet"
+    log01.vm.provider "hyperv" do |hv|
+      hv.vmname = "log01"
       hv.cpus = 4
       hv.memory = "8196"
       hv.enable_virtualization_extensions = true
       hv.linked_clone = true
     end
-    srv01.vm.provision "uploads", 
+    log01.vm.provision "uploads", 
       type: "file",
       source: "./uploads", destination: "c:/temp"
-      srv01.vm.provision "rename",
+      log01.vm.provision "rename",
       type: "shell",
       privileged: "true",
       reboot: "true",
@@ -130,16 +130,16 @@ Vagrant.configure("2") do |config|
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       Set-TimeZone "Eastern Standard Time"
       Set-LocalUser -Name "Administrator" -Password $dsrmPassword
-      Rename-Computer -NewName "srv01" -Force -PassThru
+      Rename-Computer -NewName "log01" -Force -PassThru
     POWERSHELL
-    srv01.vm.provision "domain",
+    log01.vm.provision "domain",
       type: "shell",
       privileged: "true",
       inline: <<-'POWERSHELL'
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       #Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -PassThru -Verbose
     POWERSHELL
-    srv01.vm.provision "installSplunk",
+    log01.vm.provision "installSplunk",
       type: "shell",
       privileged: "true",
       reboot: "false",
