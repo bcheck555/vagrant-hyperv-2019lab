@@ -5,7 +5,7 @@ $file = "splunk-9.4.1-e3bdab203ac8-windows-x64.msi"
 $basePath = "C:\Temp"
 $arguments = "/i `"$basePath\$file`" " +
   "AGREETOLICENSE=Yes " +
-  "INSTALLDIR=`"C:\Program Files\Splunk`" " +
+  "INSTALLDIR=`"D:\Program Files\Splunk`" " +
   "SPLUNKD_PORT=8089 " +
   "WEB_PORT=8000 " +
   "WINEVENTLOG_APP_ENABLE=0 " +
@@ -39,9 +39,11 @@ $arguments = "/i `"$basePath\$file`" " +
   "/passive"
 $ProgressPreference = 'SilentlyContinue'   #Speeds up IWR ¯\_(ツ)_/¯
 
-#Import GPOs
+#Install
 if (!(Test-Path -Path $basePath -PathType Container)) {
     New-Item -ItemType "directory" -Path $basePath
 }
 Invoke-WebRequest -Uri $url\$file -OutFile $basePath\$file
 Start-Process msiexec.exe -ArgumentList $arguments -Wait
+
+#Config

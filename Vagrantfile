@@ -28,6 +28,9 @@ Vagrant.configure("2") do |config|
       hv.enable_virtualization_extensions = true
       hv.linked_clone = true
     end
+    dc01.vm.provision "scripts", 
+      type: "file",
+      source: "./scripts", destination: "c:/temp"
     dc01.vm.provision "uploads", 
       type: "file",
       source: "./uploads", destination: "c:/temp"
@@ -119,10 +122,13 @@ Vagrant.configure("2") do |config|
       hv.enable_virtualization_extensions = true
       hv.linked_clone = true
     end
+    pki01.vm.provision "scripts", 
+      type: "file",
+      source: "./scripts", destination: "c:/temp"
     pki01.vm.provision "uploads", 
       type: "file",
       source: "./uploads", destination: "c:/temp"
-      pki01.vm.provision "rename",
+    pki01.vm.provision "rename",
       type: "shell",
       privileged: "true",
       reboot: "true",
@@ -141,10 +147,16 @@ Vagrant.configure("2") do |config|
       $credential = New-Object System.Management.Automation.PSCredential($serviceAccount, $dsrmPassword)
       Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -Credential $credential -PassThru -Verbose -Restart -Force
     POWERSHELL
+    pki01.vm.provision "installADCS",
+      type: "shell",
+      privileged: "true",
+      reboot: "false",
+      path: "./scripts/InstallADCS.ps1"
   end
 
   config.vm.define "log01" do |log01|
     log01.vm.network "private_network", bridge: "Ethernet"
+    log01.vm.disk :disk, size: "20GB", primary: false, name: "backup" #, provider_config: { "hyperv__Fixed" => true }
     log01.vm.provider "hyperv" do |hv|
       hv.vmname = "log01"
       hv.cpus = 4
@@ -152,10 +164,13 @@ Vagrant.configure("2") do |config|
       hv.enable_virtualization_extensions = true
       hv.linked_clone = true
     end
+    log01.vm.provision "scripts", 
+      type: "file",
+      source: "./scripts", destination: "c:/temp"
     log01.vm.provision "uploads", 
       type: "file",
       source: "./uploads", destination: "c:/temp"
-      log01.vm.provision "rename",
+    log01.vm.provision "rename",
       type: "shell",
       privileged: "true",
       reboot: "true",
@@ -164,6 +179,14 @@ Vagrant.configure("2") do |config|
       Set-TimeZone "Eastern Standard Time"
       Set-LocalUser -Name "Administrator" -Password $dsrmPassword
       Rename-Computer -NewName "log01" -Force -PassThru
+    POWERSHELL
+    log01.vm.provision "adddisk",
+      type: "shell",
+      privileged: "true",
+      inline: <<-'POWERSHELL'
+      Initialize-Disk -Number 1 -PartitionStyle MBR
+      New-Partition -DiskNumber 1 -UseMaximumSize -DriveLetter D
+      Format-Volume -DriveLetter D -FileSystem NTFS
     POWERSHELL
     log01.vm.provision "domain",
       type: "shell",
