@@ -42,6 +42,7 @@ Vagrant.configure("2") do |config|
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       Set-TimeZone "Eastern Standard Time"
       Set-LocalUser -Name "Administrator" -Password $dsrmPassword
+      #Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
       Rename-Computer -NewName "dc01" -Force -PassThru
       POWERSHELL
     dc01.vm.provision "domain",
@@ -52,6 +53,19 @@ Vagrant.configure("2") do |config|
       Install-WindowsFeature -name AD-Domain-Services,DNS -IncludeManagementTools
       Install-ADDSForest -DomainName packet.loss -DomainMode 7 -ForestMode 7 -SafeModeAdministratorPassword $dsrmPassword -Force
       POWERSHELL
+    dc01.vm.provision "dns",
+      type: "shell",
+      privileged: "false",
+      reboot: "true",
+      inline: <<-'POWERSHELL'
+      $interfaceIndex = (Get-NetAdapter | Where-Object {$_.Status -eq "Up"}).ifIndex
+      Set-DnsClientServerAddress -InterfaceIndex $interfaceIndex -ServerAddresses ("127.0.0.1","192.168.1.1")
+      POWERSHELL
+    dc01.vm.provision "FW_ADDS",
+      type: "shell",
+      privileged: "true",
+      reboot: "true",
+      path: "./scripts/FW_ADDS.ps1"
   end
 
   config.vm.define "dc02" do |dc02|
@@ -78,6 +92,7 @@ Vagrant.configure("2") do |config|
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       Set-TimeZone "Eastern Standard Time"
       Set-LocalUser -Name "Administrator" -Password $dsrmPassword
+      #Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
       Rename-Computer -NewName "dc02" -Force -PassThru
       POWERSHELL
     dc02.vm.provision "domain",
@@ -91,25 +106,30 @@ Vagrant.configure("2") do |config|
       Install-WindowsFeature -name AD-Domain-Services,DNS -IncludeManagementTools
       Install-ADDSDomainController -InstallDns -DomainName "packet.loss" -Credential $credential -SafeModeAdministratorPassword $dsrmPassword -Force
       POWERSHELL
+    dc02.vm.provision "FW_ADDS",
+      type: "shell",
+      privileged: "true",
+      reboot: "true",
+      path: "./scripts/FW_ADDS.ps1"
     dc02.vm.provision "OUMapping",
       type: "shell",
       privileged: "true",
-      #reboot: "false",
+      reboot: "true",
       path: "./scripts/OUMapping.ps1"
     dc02.vm.provision "GPOImport",
       type: "shell",
       privileged: "true",
-      #reboot: "false",
+      reboot: "true",
       path: "./scripts/GPOImport.ps1"
     dc02.vm.provision "GPOMapping",
       type: "shell",
       privileged: "true",
-      #reboot: "true",
+      reboot: "true",
       path: "./scripts/GPOMapping.ps1"
     dc02.vm.provision "WMIMapping",
       type: "shell",
       privileged: "true",
-      reboot: "false",
+      reboot: "true",
       path: "./scripts/WMIMapping.ps1"
   end
   
@@ -119,6 +139,7 @@ Vagrant.configure("2") do |config|
       hv.vmname = "pki01"
       hv.cpus = 4
       hv.memory = "8196"
+      hv.mac = "00155d010293"
       hv.enable_virtualization_extensions = true
       hv.linked_clone = true
     end
@@ -136,22 +157,61 @@ Vagrant.configure("2") do |config|
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       Set-TimeZone "Eastern Standard Time"
       Set-LocalUser -Name "Administrator" -Password $dsrmPassword
+      #Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
       Rename-Computer -NewName "pki01" -Force -PassThru
     POWERSHELL
     pki01.vm.provision "domain",
       type: "shell",
       privileged: "true",
+      #reboot: "true",
       inline: <<-'POWERSHELL'
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       $serviceAccount = "packet\Administrator"
       $credential = New-Object System.Management.Automation.PSCredential($serviceAccount, $dsrmPassword)
-      Add-Computer -DomainName packet.loss -OUPath "OU=Tier1A,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -Credential $credential -PassThru -Verbose -Restart -Force
+      Add-Computer -DomainName packet.loss -OUPath "OU=Tier0,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS" -Credential $credential -PassThru -Verbose -Restart -Force
     POWERSHELL
+    pki01.vm.provision "FW_ADCS",
+      type: "shell",
+      privileged: "true",
+      reboot: "true",
+      path: "./scripts/FW_ADCS.ps1"
     pki01.vm.provision "installADCS",
       type: "shell",
       privileged: "true",
-      reboot: "false",
-      path: "./scripts/InstallADCS.ps1"
+      reboot: "true",
+      inline: <<-'POWERSHELL'
+      $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
+      $serviceAccount = "packet\Administrator"
+      $credential = New-Object System.Management.Automation.PSCredential($serviceAccount, $dsrmPassword)
+      $featureName = "Adcs-Cert-Authority"
+      $params = @{
+          CAType              = "EnterpriseRootCa"
+          caCommonName        = "HomeLAB Root CA"
+          CryptoProviderName  = "RSA#Microsoft Software Key Storage Provider"
+          KeyLength           = 2048
+          HashAlgorithmName   = "SHA256"
+          ValidityPeriod      = "Years"
+          ValidityPeriodUnits = 30
+      }
+      $feature = Get-WindowsFeature -Name $featureName
+      if (!($feature.InstallState -eq "Installed")) {
+          Install-WindowsFeature -Name $featureName -IncludeManagementTools
+      }
+      Install-AdcsCertificationAuthority @params -Credential $credential -Force
+    POWERSHELL
+    # pki01.vm.provision "installADCS",
+    #   type: "shell",
+    #   privileged: "true",
+    #   reboot: "true",
+    #   path: "./scripts/InstallADCS.ps1"
+    pki01.vm.provision "caTemplates",
+      type: "shell",
+      privileged: "true",
+      inline: <<-'POWERSHELL'
+      Get-CATemplate | Remove-CATemplate -Force
+      Add-CATemplate -Name "Workstation" -Force
+      Add-CATemplate -Name "KerberosAuthentication" -Force
+    POWERSHELL
   end
 
   config.vm.define "log01" do |log01|
@@ -161,6 +221,7 @@ Vagrant.configure("2") do |config|
       hv.vmname = "log01"
       hv.cpus = 4
       hv.memory = "8196"
+      hv.mac = "00155d010294"
       hv.enable_virtualization_extensions = true
       hv.linked_clone = true
     end
@@ -178,6 +239,7 @@ Vagrant.configure("2") do |config|
       $dsrmPassword = ConvertTo-SecureString -String 'P@55w0rd' -AsPlainText -Force
       Set-TimeZone "Eastern Standard Time"
       Set-LocalUser -Name "Administrator" -Password $dsrmPassword
+      #Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
       Rename-Computer -NewName "log01" -Force -PassThru
     POWERSHELL
     log01.vm.provision "adddisk",

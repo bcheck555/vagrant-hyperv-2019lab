@@ -14,6 +14,3 @@ if (!($feature.InstallState -eq "Installed")) {
     Install-WindowsFeature -Name $featureName -IncludeManagementTools
 }
 Install-AdcsCertificationAuthority @params -Force
-Get-CATemplate | Remove-CATemplate -Force
-Add-CATemplate -Name "Workstation" -Force
-Add-CATemplate -Name "KerberosAuthentication" -Force

@@ -1,15 +1,18 @@
 "Name","Target","Order","Link"
-"DoD WinSvr 2012 R2 DC STIG Comp v3r7","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
-"DoD WinSvr 2016 DC STIG Comp v2r9","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
+"LAB Default Domain Policy","DC=packet,DC=loss",1,Yes
+"LAB Default Domain Controllers Policy","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
+"DoD WinSvr 2012 R2 DC STIG Comp v3r7","OU=Domain Controllers,DC=packet,DC=loss",1,No
+"DoD WinSvr 2016 DC STIG Comp v2r9","OU=Domain Controllers,DC=packet,DC=loss",1,No
 "DoD WinSvr 2019 DC STIG Comp v3r2","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
-"DoD WinSvr 2022 DC STIG Comp v2r3","OU=Domain Controllers,DC=packet,DC=loss",1,Yes
-"DoD WinSvr 2012 R2 MS STIG Comp v3r7","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD WinSvr 2016 MS STIG Comp v2r9","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2022 DC STIG Comp v2r3","OU=Domain Controllers,DC=packet,DC=loss",1,No
+"DoD Windows Defender Firewall STIG v2r2","OU=Domain Controllers,DC=PACKET,DC=LOSS",1,No
+"DoD WinSvr 2012 R2 MS STIG Comp v3r7","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD WinSvr 2016 MS STIG Comp v2r9","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD WinSvr 2019 MS STIG Comp v3r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD WinSvr 2022 MS STIG Comp v2r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD Windows 10 STIG Computer v3r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD Windows 11 Computer STIG v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD Windows Defender Firewall STIG v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2022 MS STIG Comp v2r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Windows 10 STIG Computer v3r3","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Windows 11 Computer STIG v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Windows Defender Firewall STIG v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD Microsoft Defender Antivirus STIG Computer v2r4","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
 "DoD Internet Explorer 11 STIG Computer v2r4","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
 "DoD Microsoft Edge STIG Computer v2r2","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
@@ -24,12 +27,14 @@
 "DoD Google Chrome STIG Computer v2r10","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD Adobe Acrobat Reader DC Continuous STIG Computer V2R1","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD Adobe Acrobat Pro DC Continuous STIG Computer v2r1","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
-"DoD WinSvr 2012 R2 DC STIG User v3r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD WinSvr 2012 R2 MS STIG User v3r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD WinSvr 2016 DC STIG User v2r9","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"LAB Vagrant Settings","OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2019 DC STIG Comp v3r2","OU=Tier0,OU=Computers,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD WinSvr 2012 R2 DC STIG User v3r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD WinSvr 2012 R2 MS STIG User v3r7","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD WinSvr 2016 DC STIG User v2r9","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD WinSvr 2016 MS STIG User v2r9","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD Windows 10 STIG User v3r3","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
-"DoD Windows 11 User STIG v2r2","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
+"DoD Windows 10 STIG User v3r3","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
+"DoD Windows 11 User STIG v2r2","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD Internet Explorer 11 STIG User v2r4","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,Yes
 "DoD Office System 2013 STIG User v2r1","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
 "DoD Access 2013 STIG User v1r6","OU=Users,OU=HomeLab,DC=PACKET,DC=LOSS",1,No
